@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insurance Charges Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f0f8ff;
+            font-family: 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        .form-card {
+            padding: 2rem;
+            border-radius: 1rem;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <div class="form-card">
+            <h2 class="text-center mb-4">💼 Insurance Charges Predictor</h2>
+            <form action="{{ url_for('predict') }}" method="POST">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Age</label>
+                        <input type="number" name="age" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Gender</label>
+                        <select class="form-select" name="gender" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">BMI</label>
+                        <input type="number" step="0.1" name="bmi" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Children</label>
+                        <input type="number" name="children" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Smoker</label>
+                        <select class="form-select" name="smoker" required>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Region</label>
+                        <select class="form-select" name="region" required>
+                            <option value="southeast">Southeast</option>
+                            <option value="southwest">Southwest</option>
+                            <option value="northeast">Northeast</option>
+                            <option value="northwest">Northwest</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">🔍 Predict Charges</button>
+                </div>
+            </form>
+
+            {% if prediction %}
+            <div class="alert alert-success text-center mt-4">
+                <h4>Estimated Insurance Charges: ₹{{ prediction }}</h4>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2024 Insurance Charges Predictor
+    </footer>
+
+</body>
+
+</html>
